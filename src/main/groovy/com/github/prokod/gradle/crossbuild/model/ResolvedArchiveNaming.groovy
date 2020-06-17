@@ -7,11 +7,9 @@ package com.github.prokod.gradle.crossbuild.model
  */
 class ResolvedArchiveNaming extends ArchiveNaming {
     final String appendix
-    final String scalaTag
 
-    ResolvedArchiveNaming(String appendixPattern, String appendix, String scalaTag) {
-        super('ResolvedArchiveNaming', appendixPattern, scalaTag, null)
+    ResolvedArchiveNaming(String appendixPattern, String appendix) {
+        super('ResolvedArchiveNaming', appendixPattern, null)
         this.appendix = appendix
-        this.scalaTag = scalaTag
     }
 }

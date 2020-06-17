@@ -49,7 +49,7 @@ class BuildResolver {
     static ResolvedBuildAfterEvalLifeCycle resolveConfigPhaseBuild(ResolvedBuildConfigLifecycle build) {
         def resolvedAppendix = resolveAppendix(build)
 
-        def resolvedArchiveNaming = new ResolvedArchiveNaming(build.delegate.archive.appendixPattern, resolvedAppendix, build.delegate.archive.scalaTag)
+        def resolvedArchiveNaming = new ResolvedArchiveNaming(build.delegate.archive.appendixPattern, resolvedAppendix)
 
         new ResolvedBuildAfterEvalLifeCycle(build, resolvedArchiveNaming)
     }

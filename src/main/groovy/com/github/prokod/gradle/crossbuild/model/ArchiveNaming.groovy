@@ -12,18 +12,16 @@ class ArchiveNaming {
     final String name
     final BuildUpdateEventStore eventStore
     String appendixPattern
-    String scalaTag
 
     static ArchiveNaming from(ArchiveNamingSnapshot snapshot) {
-        new ArchiveNaming(snapshot.name, snapshot.appendixPattern, snapshot.scalaTag, null)
+        new ArchiveNaming(snapshot.name, snapshot.appendixPattern, null)
     }
 
     @Inject
-    ArchiveNaming(String name, String appendixPattern, String scalaTag, BuildUpdateEventStore eventStore) {
+    ArchiveNaming(String name, String appendixPattern, BuildUpdateEventStore eventStore) {
         this.name = name
         this.appendixPattern = appendixPattern
         this.eventStore = eventStore
-        this.scalaTag = scalaTag ?: '_?'
     }
 
     /**
@@ -50,26 +48,4 @@ class ArchiveNaming {
         }
     }
 
-    /**
-     * Triggered when a DSL of the following form appears:
-     * <pre>
-     *     crossBuild {
-     *         builds {
-     *             v213 {
-     *                 archive.setScalaTag = ...
-     *             }
-     *         }
-     *     }
-     * </pre>
-     *
-     * @param appendixPattern
-     */
-    void setScalaTag(String scalaTag) {
-        def oldValue = this.scalaTag
-        this.scalaTag = scalaTag
-
-        if (oldValue != scalaTag) {
-            eventStore?.store(new ArchiveNamingUpdateEvent(this))
-        }
-    }
 }

@@ -25,7 +25,7 @@ class CrossBuildExtension {
     final CrossBuildSourceSets crossBuildSourceSets
 
     Map<String, String> scalaVersionsCatalog = [:]
-
+    String scalaTag = "_?";
     ArchiveNaming archive
 
     Set<Configuration> configurations = []
@@ -36,9 +36,8 @@ class CrossBuildExtension {
 
     CrossBuildExtension(Project project) {
         this.project = project
-
         this.archive = project.objects.newInstance(ArchiveNaming,
-                'DefaultArchiveNaming', '_?', '_?', new BuildUpdateEventStore(project))
+                'DefaultArchiveNaming', '_?', new BuildUpdateEventStore(project))
 
         this.crossBuildSourceSets = new CrossBuildSourceSets(project)
 
@@ -73,7 +72,6 @@ class CrossBuildExtension {
 
     void applyBuildDefaults(Build build) {
         build.archive.appendixPattern = this.archive.appendixPattern
-        build.archive.scalaTag = this.archive.scalaTag
     }
 
     /**

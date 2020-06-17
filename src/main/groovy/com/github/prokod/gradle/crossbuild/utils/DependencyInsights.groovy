@@ -23,9 +23,11 @@ import javax.inject.Inject
 class DependencyInsights {
 
     final SourceSetInsights sourceSetInsights
+    final String scalaTag
 
-    DependencyInsights(SourceSetInsights sourceSetInsights) {
+    DependencyInsights(SourceSetInsights sourceSetInsights, String scalaTag) {
         this.sourceSetInsights = sourceSetInsights
+        this.scalaTag = scalaTag
     }
 
     /**
@@ -69,7 +71,7 @@ class DependencyInsights {
      * @param view
      * @param scalaVersions
      */
-    void addMainConfigurationToCrossBuildCounterPart(ViewType view, ScalaVersions scalaVersions, String scalaTag) {
+    void addMainConfigurationToCrossBuildCounterPart(ViewType view, ScalaVersions scalaVersions) {
         def insightsView = new SourceSetInsightsView(sourceSetInsights, view)
 
         def consumerConfiguration = insightsView.configurations.crossBuild
